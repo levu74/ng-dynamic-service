@@ -1,0 +1,9 @@
+<input [(ngModel)]="appName" type="text">
+<select [(ngModel)]="dtd">
+  <option value="US_2_01">US 2.01</option>
+  <option value="US_3_3">US 3.3</option>
+</select>
+<button (click)="verifyAppName()">Verify</button>
+<p>
+  result: {{isValid}}
+</p>
