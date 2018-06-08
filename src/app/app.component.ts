@@ -1,7 +1,13 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { PluginManager } from 'core'
-import { ApplicationService, APPLICATION_SERVICE } from 'shared';
-import { DtdPluginManager } from 'projects/shared/src/public_api';
+import { 
+  ApplicationService, 
+  APPLICATION_SERVICE, 
+  DtdPluginManager,
+  AUTO_RENAME_SERVICE,
+  AutoRenameService 
+} from 'shared';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,12 +26,22 @@ export class AppComponent implements OnInit {
    
   }
 
-  verifyAppName(){
-    var applicationService = this.pluginManager.getService<ApplicationService>(APPLICATION_SERVICE, this.dtd);
+  verifyAppName() {
+    let applicationService = this.pluginManager.getService<ApplicationService>(APPLICATION_SERVICE, this.dtd);
     if(applicationService){
       this.isValid = '' + applicationService.isValidApplicationName(this.appName);
     } else {
       this.isValid = 'There is no implemented service';
     }
+  }
+
+  correctAppName() {
+    let autoRenameService = this.pluginManager.getService<AutoRenameService>(AUTO_RENAME_SERVICE, this.dtd);
+    if(autoRenameService){
+      this.appName = autoRenameService.getNewName(this.appName);
+    } else {
+      this.isValid = 'There is no implemented service';
+    }
+
   }
 }
