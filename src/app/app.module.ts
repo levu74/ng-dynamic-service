@@ -16,9 +16,8 @@ import { Us201Module } from 'us201';
     CoreModule, 
     FormsModule,
     Us33Module,
-    //Us201Module
+    Us201Module
   ],
-  providers: [PluginManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
